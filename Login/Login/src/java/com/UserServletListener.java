@@ -24,7 +24,7 @@ public class UserServletListener implements ServletContextListener {
 
     private Connection conn = null;
     
-    @Override
+    
     public void contextInitialized(ServletContextEvent sce) {
         ServletContext sc = sce.getServletContext();
         String db = sc.getInitParameter("dbname");

@@ -8,10 +8,10 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>DB Results</title>
+        <title>List of Customers</title>
     </head>
     <body>
-        <h1>List of users :</h1>
+        <h1>List of Customers: </h1>
 
         <%=(String)(request.getAttribute("query"))%>
         <jsp:include page="foot.jsp"/>

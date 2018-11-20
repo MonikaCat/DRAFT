@@ -26,9 +26,9 @@
             {
                  List<String> values = (ArrayList)request.getSession().getAttribute("user_details");
              String user_name = values.get(0).toString();
-             System.out.println("USERNAME " + user_name);
+             //System.out.println("USERNAME " + user_name);
              String user_type = values.get(1).toString();
-             System.out.println("USER TYPE " + user_type);
+             //System.out.println("USER TYPE " + user_type);
                 System.out.println("WE REACH HERE2222222");
                  System.out.println(request.getSession().getAttribute("user_details"));
                  System.out.println("WE REACH HERE");
@@ -43,6 +43,15 @@
             <input type="radio" name="tbl" value="Driver">DRIVER PAGE<br />
           
             <input type=submit value="Confirm"> <br />
+<<<<<<< HEAD
+            
+            <div id="top" style="float: top">
+=======
+            <div id="top" style="float: top;">
+                <!-- this assumes your User class has a username field with a valid getter -->
+>>>>>>> 77a00a668fadcb166cf1baa92eff8ae5219065c8
+                Hello ${user_details[0]}
+            </div>
         </form> 
         <br>
         <br>
