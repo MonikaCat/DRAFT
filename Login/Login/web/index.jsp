@@ -43,13 +43,10 @@
             <input type="radio" name="tbl" value="Driver">DRIVER PAGE<br />
           
             <input type=submit value="Confirm"> <br />
-<<<<<<< HEAD
-            
-            <div id="top" style="float: top">
-=======
+
             <div id="top" style="float: top;">
                 <!-- this assumes your User class has a username field with a valid getter -->
->>>>>>> 77a00a668fadcb166cf1baa92eff8ae5219065c8
+
                 Hello ${user_details[0]}
             </div>
         </form> 

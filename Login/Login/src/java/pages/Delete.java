@@ -37,10 +37,13 @@ public class Delete extends HttpServlet {
            HttpSession session = request.getSession(false);
         
          // Create array of strings
-        String [] query = new String[2];
+        String [] query = new String[5];
          // Request parameter and save it in array
         query[0] = (String)request.getParameter("user_name");
         query[1] = (String)request.getParameter("user_password");
+        query[2] = (String)request.getParameter("user_address");
+        query[3] = (String)request.getParameter("registration");
+        query[4] = (String)request.getParameter("admin_password");
         //String insert = "INSERT INTO `Users` (`username`, `password`) VALUES ('";
       
         // Access Jdbc class and get create session  
@@ -57,22 +60,37 @@ public class Delete extends HttpServlet {
         } 
         
         // Check if password field is empty and display error message
-        if(query[1].equals(""))
+        /*if(query[1].equals(""))
         {
            request.setAttribute("message", "Password cannot be NULL"); 
-        }
+        }*/
         // Check if user and password exists in database and delete him if successful
-        if(jdbc.userExists(query[0], query[1]))
+        if(jdbc.userExists(query[0], query[2]))
         {
+            if(query[4].equals("admin"))
+            {
+                System.out.println("DO WE GET HERE?");
             jdbc.delete(query[0]);
             request.setAttribute("message", "Username "+query[0]+" has been deleted");
+            }
+        }
+        
+        if(jdbc.driverExists(query[0], query[3]))
+        {
+            if(query[4].equals("admin"))
+            { 
+                jdbc.deleteDriver(query[3]);
+                request.setAttribute("message", "Driver "+query[0]+" has been deleted");
+            }
         }
         
         //  Check if password exists in database 
         else if(jdbc.exists(query[0]))
         {
-            request.setAttribute("message", "Wrong password!");
+            request.setAttribute("message", "Incorrect! Please Try Again!");
         }
+        
+        
         
         // Display message to user if user doesn't exist in the database
         else {

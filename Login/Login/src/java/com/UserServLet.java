@@ -9,6 +9,8 @@ import java.io.IOException;
 //import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -83,6 +85,21 @@ public class UserServLet extends HttpServlet {
             request.getRequestDispatcher("/WEB-INF/results.jsp").forward(request, response);
         }
         else if(request.getParameter("tbl").equals("NewUser")){
+            String name = "user";
+            String action = "add";
+            List<String> strg = new ArrayList<String>();
+            strg.add(name);
+            strg.add(action);
+            request.setAttribute("msg", strg);
+            request.getRequestDispatcher("/WEB-INF/user.jsp").forward(request, response);
+        } 
+        else if(request.getParameter("tbl").equals("NewDriver")){
+            String name = "driver";
+            String action = "add";
+            List<String> strg = new ArrayList<String>();
+            strg.add(name);
+            strg.add(action);
+            request.setAttribute("msg", strg);
             request.getRequestDispatcher("/WEB-INF/user.jsp").forward(request, response);
         } 
         else if(request.getParameter("tbl").equals("Update")){
@@ -99,6 +116,25 @@ public class UserServLet extends HttpServlet {
         }
         else if(request.getParameter("tbl").equals("User")){
             request.getRequestDispatcher("/WEB-INF/userhome.jsp").forward(request, response);    
+        }
+        else if(request.getParameter("tbl").equals("DeleteUser")){
+                String name = "user";
+                String action = "del";
+                List<String> strg = new ArrayList<String>();
+                strg.add(name);
+                strg.add(action);
+                request.setAttribute("msg", strg);
+                request.getRequestDispatcher("/WEB-INF/user.jsp").forward(request, response);    
+        }
+        
+         else if(request.getParameter("tbl").equals("DeleteDriver")){
+                String name = "driver";
+                String action = "del";
+                List<String> strg = new ArrayList<String>();
+                strg.add(name);
+                strg.add(action);
+                request.setAttribute("msg", strg);
+                request.getRequestDispatcher("/WEB-INF/user.jsp").forward(request, response);    
         }
         
         else {

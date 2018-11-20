@@ -6,6 +6,7 @@
 package pages;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.ServletException;
@@ -17,9 +18,9 @@ import model.Jdbc;
 
 /**
  *
- * @author me-aydin
+ * @author Mandoka
  */
-public class NewUser extends HttpServlet {
+public class NewDriver extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -33,17 +34,15 @@ public class NewUser extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
         HttpSession session = request.getSession(false);
         
         // Create array of strings
-        String [] query = new String[5];
+        String [] query = new String[4];
         // Request parameter and save it in array
         query[0] = (String)request.getParameter("user_name");
-        query[1] = (String)request.getParameter("user_address");
-        query[2] = (String)request.getParameter("user_id");
-        query[3] = (String)request.getParameter("user_password");
-        query[4] = (String)request.getParameter("admin_password");
+        query[1] = (String)request.getParameter("registration");
+        query[2] = (String)request.getParameter("user_password");
+        query[3] = (String)request.getParameter("admin_password");
         
         //String insert = "INSERT INTO `Users` (`username`, `password`) VALUES ('";
       
@@ -65,23 +64,18 @@ public class NewUser extends HttpServlet {
             request.setAttribute("message", "Password cannot be NULL");
         }
         // Check if user already exists in the system and display error message
-        if(jdbc.exists(query[0])){
-            request.setAttribute("message", query[0]+" already exists in the system. Please try again!");
+        if(jdbc.driverExists(query[0], query[1])){
+            request.setAttribute("message", "Driver " + query[0]+" already exists in the system. Please try again!");
         }
         
         // If no errors found, save new user and password in database
         
         else
         {
-                    
-                    if(query[4].equals("admin"))
+          if(query[3].equals("admin"))
                     {
-                    System.out.println("WE GET HERE");
-                    jdbc.insert(query);
-                    
- 
-                    //request.setAttribute("message", "User " + query[0]+" has been added");
-                    System.out.println("ADDED!!!!!!!!!!");
+                        jdbc.insertDriver(query);
+
                     }
         // Redirect to user.jsp page
         }

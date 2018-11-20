@@ -25,7 +25,6 @@
  %>
 
         <h1>USER HOMEPAGE</h1>
-<<<<<<< HEAD
         <form method="POST" action="UserService.do">
         <p />
         View a table <br />
@@ -41,6 +40,7 @@
             <br>
             <br>
             <jsp:include page="foot.jsp"/>
+            <button type="button" name="back" onclick="history.back()">GO BACK</button>
             <br>
             <form action="Logout">
         <input type="submit" value="Log out" />
@@ -51,23 +51,5 @@
             }
 
         %>
-=======
-         <form method="POST" action="UserService.do">
-        <p />
-            View a table <br />
-            <input type="radio" name="tbl" value="Update">Password Change<br />
-            
-            <input type="radio" name="tbl" value="Book">Book car<br />
-            
-            <input type=submit value="Confirm"> <br />
-        </form> 
-        <br>
-        <br>
-        <button type="button" name="back" onclick="history.back()">back</button>
-        <br>
-        <form action="Logout">
-    <input type="submit" value="Log out" />
-        </form>
->>>>>>> 77a00a668fadcb166cf1baa92eff8ae5219065c8
     </body>
 </html>

@@ -104,10 +104,10 @@ public class Jdbc {
         return makeTable(rsToList());//results;
     }
     
-    public boolean userExists(String user, String password) {
+    public boolean userExists(String user, String address) {
         boolean bool = false;
         try  {
-            select("select * from Taxi.Customer where NAME='"+user+"' and PASSWORD='"+password+"'");
+            select("select * from Taxi.Customer where NAME='"+user+"' and ADDRESS='"+address+"'");
             if(rs.next()) {
                 System.out.println("TRUE");         
                 bool = true;
@@ -119,10 +119,10 @@ public class Jdbc {
     }
     
     
-    public boolean driverExists(String driver, String password) {
+    public boolean driverExists(String driver, String registration) {
         boolean bool = false;
         try  {
-            select("select * from Taxi.Drivers where NAME='"+driver+"' AND PASSWORD='"+password+"'");
+            select("select * from Taxi.Drivers where NAME='"+driver+"' AND REGISTRATION='"+registration+"'");
             if(rs.next()) {
                 System.out.println("TRUE");         
                 bool = true;
@@ -132,6 +132,20 @@ public class Jdbc {
         }
         return bool;
     }
+    
+        public boolean userAddressExists(String user, String address) {
+        boolean bool = false;
+        try  {
+            select("select * from Taxi.Customer where NAME='"+user+"' AND ADDRESS='"+address+"'");
+            if(rs.next()) {
+                System.out.println("TRUE");         
+                bool = true;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Jdbc.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return bool;
+    }    
     
     
     public boolean exists(String user) {
@@ -152,10 +166,37 @@ public class Jdbc {
         PreparedStatement ps = null;
         try {
             ps = connection.prepareStatement("INSERT INTO Taxi.Customer VALUES (?,?,?,?)",PreparedStatement.RETURN_GENERATED_KEYS);
+            
+            //nt id = 1;
+            
+            //select("select ID from Taxi.Customer where ID='"+id+"' ");
+
             ps.setString(1, str[0].trim()); 
             ps.setString(2, str[1]);
-            ps.setString(3, str[2]);
+            //ps.setString(3, id);
+            ps.setInt(3, NULL);
             ps.setString(4, str[3]);
+           
+            ps.executeUpdate();
+        
+            ps.close();
+            System.out.println("1 row added.");
+        } catch (SQLException ex) {
+            Logger.getLogger(Jdbc.class.getName()).log(Level.SEVERE, null, ex);
+        }
+         
+    }
+    
+    
+    
+    public void insertDriver(String[] str){
+        PreparedStatement ps = null;
+        try {
+            ps = connection.prepareStatement("INSERT INTO Taxi.Drivers VALUES (?,?,?)",PreparedStatement.RETURN_GENERATED_KEYS);
+            
+            ps.setString(1, str[1].trim()); 
+            ps.setString(2, str[0]);
+            ps.setString(3, str[2]);
            
             ps.executeUpdate();
         
@@ -211,6 +252,22 @@ public class Jdbc {
             Logger.getLogger(Jdbc.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
+    public void deleteDriver(String registration){
+       
+      String query = "DELETE FROM Taxi.Drivers WHERE REGISTRATION='"+registration.trim()+"' ";
+      
+        try {
+            statement = connection.createStatement();
+            statement.executeUpdate(query);
+            
+        }
+        catch(SQLException e) {
+            System.out.println("way way"+e);
+            //results = e.toString();
+        }
+    }
+    
     public void delete(String user){
        
       String query = "DELETE FROM Taxi.Customer " +
@@ -238,7 +295,7 @@ public class Jdbc {
     }
     public static void main(String[] args) throws SQLException {
         String str = "select * from Taxi.Customer";
-        String insert = "INSERT INTO `Taxi.Customer` (`NAME`, `ADDRESS`, `ID`, `PASSWORD`) VALUES ('taxi', 'london', '19', 'taxi123')";
+        String insert = "INSERT INTO `Taxi.Customer` (`NAME`, `ADDRESS`, `ID`, `PASSWORD`) VALUES ('taxi', 'london', '1', 'taxi123')";
         String insertJourney = "INSERT INTO `Taxi.Journey` (`JID`,`ID`, `DESTINATION`,`DISTANCE`,`REGISTRATION`, `DATE`, `TIME`, `PICKUP`) VALUES ('12', '5', london', '120', 'MK02XWL', '2016-10-02', '12:00:00', 'bristol')";
         String update = "UPDATE `Taxi.Customer` SET `PASSWORD`='taxi123' WHERE `NAME`='taxi'";
         String db = "MyDB";

@@ -32,6 +32,10 @@
         <servlet-name>Booking</servlet-name>
         <servlet-class>pages.Booking</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>NewDriver</servlet-name>
+        <servlet-class>pages.NewDriver</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>UserServLet</servlet-name>
         <url-pattern>/UserService.do</url-pattern>
@@ -59,6 +63,10 @@
     <servlet-mapping>
         <servlet-name>Booking</servlet-name>
         <url-pattern>/Booking</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>NewDriver</servlet-name>
+        <url-pattern>/NewDriver</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
